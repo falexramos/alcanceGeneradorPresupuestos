@@ -26,9 +26,9 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                 <div className="w-1/2">
                     <img src={appLogo} alt="Company Logo" className="h-16 object-contain mb-4" />
                     <div className="text-sm text-slate-500 space-y-1">
-                        <p className="font-semibold text-slate-900">Alcance Digital</p>
+                        <p className="font-semibold text-slate-900">Alcance IT</p>
                         <p>Soluciones Tecnológicas</p>
-                        <p>contacto@alcancedigital.com</p>
+                        <p>contacto@alcance-it.es</p>
                     </div>
                 </div>
                 <div className="text-right w-1/2">
@@ -133,7 +133,7 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                     Este presupuesto es válido por 15 días a partir de la fecha de emisión.
                 </p>
                 <div className="flex justify-center gap-4 text-xs text-slate-300">
-                    <span>www.alcancedigital.com</span>
+                    <span>https://alcance-it.es/</span>
                     <span>•</span>
                     <span>Confidencial</span>
                 </div>

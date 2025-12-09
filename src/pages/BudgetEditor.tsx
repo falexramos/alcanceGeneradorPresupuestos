@@ -4,7 +4,12 @@ import { useReactToPrint } from 'react-to-print';
 import { db, type Budget, type BudgetItem } from '../db/db';
 import { BUDGET_TEMPLATES } from '../utils/templates';
 import { BudgetDocument } from '../components/BudgetDoc';
-import { Save, Trash2, Plus, ArrowLeft, Image as ImageIcon, Printer, X } from 'lucide-react';
+import { Save, ArrowLeft, Printer } from 'lucide-react';
+
+// Sub-components
+import { BudgetProjectInfo } from '../components/budget/BudgetProjectInfo';
+import { BudgetItemsList } from '../components/budget/BudgetItemsList';
+import { BudgetImageGallery } from '../components/budget/BudgetImageGallery';
 
 export function BudgetEditor() {
     const { id } = useParams<{ id: string }>();
@@ -198,230 +203,81 @@ export function BudgetEditor() {
         return val.toLocaleString('es-ES', { minimumFractionDigits: 0 });
     };
 
-    // UI Utilities
-    const inputClass = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
-    const labelClass = "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block";
-    const cardClass = "rounded-lg border bg-card text-card-foreground shadow-sm p-6";
-
     if (loading) return <div className="flex items-center justify-center min-h-screen">Cargando...</div>;
 
     return (
-        <div className="container mx-auto pb-24 px-4 max-w-4xl pt-6">
-            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
-                <div className="flex items-center gap-4 w-full">
-                    <button onClick={() => navigate(-1)} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 shrink-0">
-                        <ArrowLeft size={20} />
+        <div className="container mx-auto pb-32 px-0 md:px-4 max-w-4xl pt-2 md:pt-6">
+
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4 md:mb-8 px-4 md:px-0">
+                <div className="flex items-center gap-3 w-full">
+                    <button onClick={() => navigate(-1)} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 w-9 shrink-0">
+                        <ArrowLeft size={18} />
                     </button>
-                    <h1 className="text-xl md:text-2xl font-bold tracking-tight flex-1 truncate">
-                        {isTemplateMode ? 'Plantilla' : (id === 'new' ? 'Nuevo' : 'Editar')}
+                    <h1 className="text-lg md:text-2xl font-bold tracking-tight flex-1 truncate">
+                        {isTemplateMode ? 'Editor de Plantilla' : (id === 'new' ? 'Nuevo Presupuesto' : 'Editando')}
                     </h1>
                 </div>
 
                 {/* Desktop Actions */}
                 <div className="hidden md:flex gap-2 w-auto justify-end">
                     {!isTemplateMode && (
-                        <button onClick={() => handlePrint()} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 gap-2">
+                        <button onClick={() => handlePrint()} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 gap-2">
                             <Printer size={18} /> Imprimir
                         </button>
                     )}
-                    <button onClick={handleSave} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 gap-2">
+                    <button onClick={handleSave} className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 gap-2">
                         <Save size={18} /> Guardar
                     </button>
                 </div>
             </div>
 
-            <div className={`${cardClass} mb-6`}>
-                <div className="space-y-4">
-                    <div>
-                        <label className={labelClass}>
-                            {isTemplateMode ? 'Nombre de la Plantilla' : 'Título del Proyecto'}
-                        </label>
-                        <input
-                            className={inputClass}
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                            placeholder={isTemplateMode ? "Ej: Servicio Web Premium" : "Ej: Desarrollo Web Corp"}
-                        />
-                    </div>
+            {/* Components */}
+            <BudgetProjectInfo
+                title={title} setTitle={setTitle}
+                projectDescription={projectDescription} setProjectDescription={setProjectDescription}
+                clientName={clientName} setClientName={setClientName}
+                salesRepName={salesRepName} setSalesRepName={setSalesRepName}
+                salesRepPhone={salesRepPhone} setSalesRepPhone={setSalesRepPhone}
+                isTemplateMode={isTemplateMode}
+            />
 
-                    <div>
-                        <label className={labelClass}>Descripción del Servicio</label>
-                        <textarea
-                            className={`${inputClass} min-h-[80px]`}
-                            value={projectDescription}
-                            onChange={e => setProjectDescription(e.target.value)}
-                            placeholder="Describe el alcance del servicio..."
-                        />
-                    </div>
+            <BudgetItemsList
+                items={items}
+                onAddItem={handleAddItem}
+                onRemoveItem={handleRemoveItem}
+                onUpdateItem={handleUpdateItem}
+                calculateTotal={calculateTotal}
+                formatCurrency={formatCurrency}
+            />
 
-                    {!isTemplateMode && (
-                        <>
-                            <div>
-                                <label className={labelClass}>Cliente</label>
-                                <input
-                                    className={inputClass}
-                                    value={clientName}
-                                    onChange={e => setClientName(e.target.value)}
-                                    placeholder="Nombre del Cliente"
-                                />
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label className={labelClass}>Comercial</label>
-                                    <input
-                                        className={inputClass}
-                                        value={salesRepName}
-                                        onChange={e => setSalesRepName(e.target.value)}
-                                        placeholder="Nombre Comercial"
-                                    />
-                                </div>
-                                <div>
-                                    <label className={labelClass}>Teléfono</label>
-                                    <input
-                                        className={inputClass}
-                                        value={salesRepPhone}
-                                        onChange={e => setSalesRepPhone(e.target.value)}
-                                        placeholder="Tel / Whatsapp"
-                                    />
-                                </div>
-                            </div>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            <div className={`${cardClass} mb-6`}>
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-semibold leading-none tracking-tight">Items</h3>
-                    <button onClick={handleAddItem} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 gap-2">
-                        <Plus size={16} /> Agregar
-                    </button>
-                </div>
-
-                {/* Desktop Headers */}
-                <div className="hidden md:grid grid-cols-[3fr_1fr_1fr_40px] gap-4 mb-4 px-2 text-sm font-medium text-muted-foreground">
-                    <span>Descripción</span>
-                    <span>Cant.</span>
-                    <span>Precio</span>
-                    <span></span>
-                </div>
-
-                <div className="space-y-4">
-                    {items.map((item, index) => (
-                        <div key={item.id} className="flex flex-col md:grid md:grid-cols-[3fr_1fr_1fr_40px] gap-4 items-center bg-secondary/50 p-4 rounded-lg border border-border shadow-sm">
-                            <textarea
-                                className={`${inputClass} min-h-[60px] resize-y bg-background border-input`}
-                                value={item.description}
-                                onChange={e => handleUpdateItem(item.id, 'description', e.target.value)}
-                                placeholder={`Descripción del item #${index + 1}`}
-                                rows={2}
-                                autoFocus={index === items.length - 1 && item.description === ''}
-                            />
-
-                            <div className="flex gap-4 w-full md:w-auto md:contents">
-                                <div className="flex-1 md:flex-none">
-                                    <label className="md:hidden text-xs text-muted-foreground mb-1 block font-medium">Cant.</label>
-                                    <input
-                                        type="number"
-                                        className={`${inputClass} bg-background border-input`}
-                                        value={item.quantity}
-                                        onChange={e => handleUpdateItem(item.id, 'quantity', Number(e.target.value))}
-                                        placeholder="1"
-                                    />
-                                </div>
-
-                                <div className="flex-1 md:flex-none">
-                                    <label className="md:hidden text-xs text-muted-foreground mb-1 block">Precio</label>
-                                    <input
-                                        type="number"
-                                        className={inputClass}
-                                        value={item.unitPrice}
-                                        onChange={e => handleUpdateItem(item.id, 'unitPrice', Number(e.target.value))}
-                                        placeholder="0"
-                                    />
-                                </div>
-                            </div>
-
-                            <button
-                                onClick={() => handleRemoveItem(item.id)}
-                                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-destructive hover:text-destructive-foreground h-10 w-10 md:h-9 md:w-9 self-end md:self-auto text-destructive"
-                            >
-                                <Trash2 size={18} />
-                            </button>
-                        </div>
-                    ))}
-                    {items.length === 0 && (
-                        <div className="text-center py-8 text-muted-foreground">
-                            No hay items agregados
-                        </div>
-                    )}
-                </div>
-
-                <div className="mt-6 pt-6 border-t flex justify-end items-center gap-4">
-                    <span className="text-muted-foreground font-medium">Total Estimado:</span>
-                    <span className="text-2xl font-bold text-primary">
-                        ${formatCurrency(calculateTotal())}
-                    </span>
-                </div>
-            </div>
-
-            {/* Images Section */}
-            <div className={cardClass}>
-                <h3 className="text-lg font-semibold leading-none tracking-tight mb-2">Imágenes del Proyecto</h3>
-                <p className="text-sm text-muted-foreground mb-4">
-                    Estas imágenes aparecerán al final del documento PDF.
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                    {imagePreviews.map(img => (
-                        <div key={img.id} className="relative w-28 h-28 border rounded-lg overflow-hidden group">
-                            <img src={img.url} alt="Preview" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                                <button
-                                    onClick={() => handleRemoveImage(img.id)}
-                                    className="h-8 w-8 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center backdrop-blur-sm transition-colors"
-                                >
-                                    <X size={16} />
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-
-                    <label className="w-28 h-28 border-2 border-dashed rounded-lg flex flex-col items-center justify-center text-muted-foreground hover:bg-muted/50 cursor-pointer transition-colors">
-                        <ImageIcon size={24} className="mb-2" />
-                        <span className="text-xs font-medium">Agregar</span>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            multiple
-                            onChange={handleImageUpload}
-                            className="hidden"
-                        />
-                    </label>
-                </div>
-            </div>
+            <BudgetImageGallery
+                images={imagePreviews}
+                onRemoveImage={handleRemoveImage}
+                onImageUpload={handleImageUpload}
+            />
 
             {/* Mobile Sticky Action Bar */}
-            <div className="md:hidden fixed bottom-6 left-4 right-4 bg-background border border-border shadow-lg rounded-full p-2 flex items-center justify-around z-50">
+            <div className="md:hidden fixed bottom-4 left-4 right-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border border-border/40 shadow-xl rounded-full p-2 flex items-center justify-around z-50 ring-1 ring-black/5">
                 {!isTemplateMode && (
                     <button
                         onClick={() => handlePrint()}
-                        className="flex flex-col items-center justify-center p-2 text-muted-foreground hover:text-primary transition-colors"
+                        className="flex flex-col items-center justify-center p-2 text-muted-foreground hover:text-primary transition-colors w-16"
                         title="Imprimir"
                     >
                         <Printer size={20} />
-                        <span className="text-[10px] font-medium mt-1">Imprimir</span>
+                        <span className="text-[10px] font-medium mt-0.5">Imprimir</span>
                     </button>
                 )}
 
-                <div className="w-px h-8 bg-border mx-2"></div>
+                <div className="w-px h-8 bg-border/60 mx-1"></div>
 
                 <button
                     onClick={handleSave}
-                    className="flex flex-col items-center justify-center p-2 text-primary font-bold hover:text-primary/80 transition-colors flex-1"
+                    className="flex items-center justify-center gap-2 p-2 px-6 bg-primary text-primary-foreground rounded-full shadow-sm hover:bg-primary/90 transition-all active:scale-95 flex-1"
                 >
-                    <Save size={24} className="mb-1" />
-                    <span className="text-xs">GUARDAR</span>
+                    <Save size={18} />
+                    <span className="text-sm font-bold tracking-wide">GUARDAR</span>
                 </button>
             </div>
 

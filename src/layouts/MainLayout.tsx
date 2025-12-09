@@ -11,7 +11,7 @@ export function MainLayout() {
                 <div className="container flex h-16 items-center justify-between px-4">
                     <div className="flex items-center gap-2">
                         <img src={logoWhite} alt="Logo" className="h-8" />
-                        <h1 className="text-xl font-bold tracking-tight">BudgetPro</h1>
+                        <h1 className="text-xl font-bold tracking-tight">Alcance</h1>
                     </div>
 
                     {/* Desktop Nav */}
