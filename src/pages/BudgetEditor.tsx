@@ -104,6 +104,10 @@ export function BudgetEditor() {
     // Handlers
     const handleAddItem = () => {
         setItems([...items, { id: safeUUID(), description: '', quantity: 1, unitPrice: 0 }]);
+        // Auto-scroll to bottom after render
+        setTimeout(() => {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }, 100);
     };
 
     const handleUpdateItem = (itemId: string, field: keyof BudgetItem, value: any) => {
@@ -303,22 +307,23 @@ export function BudgetEditor() {
                 </div>
 
                 <div className="space-y-4">
-                    {items.map(item => (
-                        <div key={item.id} className="flex flex-col md:grid md:grid-cols-[3fr_1fr_1fr_40px] gap-4 items-center bg-muted/50 p-4 rounded-lg border">
+                    {items.map((item, index) => (
+                        <div key={item.id} className="flex flex-col md:grid md:grid-cols-[3fr_1fr_1fr_40px] gap-4 items-center bg-secondary/50 p-4 rounded-lg border border-border shadow-sm">
                             <textarea
-                                className={`${inputClass} min-h-[60px] resize-y`}
+                                className={`${inputClass} min-h-[60px] resize-y bg-background border-input`}
                                 value={item.description}
                                 onChange={e => handleUpdateItem(item.id, 'description', e.target.value)}
-                                placeholder="Descripción"
+                                placeholder={`Descripción del item #${index + 1}`}
                                 rows={2}
+                                autoFocus={index === items.length - 1 && item.description === ''}
                             />
 
                             <div className="flex gap-4 w-full md:w-auto md:contents">
                                 <div className="flex-1 md:flex-none">
-                                    <label className="md:hidden text-xs text-muted-foreground mb-1 block">Cant.</label>
+                                    <label className="md:hidden text-xs text-muted-foreground mb-1 block font-medium">Cant.</label>
                                     <input
                                         type="number"
-                                        className={inputClass}
+                                        className={`${inputClass} bg-background border-input`}
                                         value={item.quantity}
                                         onChange={e => handleUpdateItem(item.id, 'quantity', Number(e.target.value))}
                                         placeholder="1"
