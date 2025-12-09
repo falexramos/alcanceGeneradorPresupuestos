@@ -22,92 +22,98 @@ export const CombinedMarketScopePage = forwardRef<HTMLDivElement, CombinedMarket
         const scope = scopeDetails && scopeDetails.length > 0 ? scopeDetails : defaultScope;
 
         return (
-            <div ref={ref} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div ref={ref} className="bg-gradient-to-br from-amber-50 via-white to-amber-50/50 min-h-[29.7cm] mx-auto max-w-[21cm] relative overflow-hidden p-12 text-slate-800 font-sans flex flex-col">
+                {/* Decorative elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-300/10 rounded-full blur-3xl pointer-events-none"></div>
 
-                {/* Market Analysis Section */}
-                <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-3">
-                        Análisis de Mercado
-                    </h2>
-                    <div className="w-16 h-1 bg-primary mb-4"></div>
+                <div className="relative z-10 flex flex-col flex-1">
 
-                    <p className="text-base leading-relaxed text-slate-700 mb-6">
-                        {marketAnalysis || defaultAnalysis}
-                    </p>
+                    {/* Market Analysis Section */}
+                    <div className="mb-8">
+                        <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                            Análisis de Mercado
+                        </h2>
+                        <div className="w-16 h-1 bg-amber-400 mb-4"></div>
 
-                    {/* Stats Cards - Compact */}
-                    <div className="grid grid-cols-3 gap-3 mb-6">
-                        <div className="p-3 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg border border-primary/20">
-                            <div className="flex items-center gap-2 mb-1">
-                                <TrendingUp className="w-4 h-4 text-primary" />
-                                <p className="text-2xl font-bold text-primary">85%</p>
+                        <p className="text-base leading-relaxed text-slate-700 mb-6">
+                            {marketAnalysis || defaultAnalysis}
+                        </p>
+
+                        {/* Stats Cards - Compact */}
+                        <div className="grid grid-cols-3 gap-3 mb-6">
+                            <div className="p-3 bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-lg border border-amber-200">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <TrendingUp className="w-4 h-4 text-amber-600" />
+                                    <p className="text-2xl font-bold text-amber-600">85%</p>
+                                </div>
+                                <p className="text-xs text-slate-600">
+                                    Investigan online antes de comprar
+                                </p>
                             </div>
-                            <p className="text-xs text-slate-600">
-                                Investigan online antes de comprar
-                            </p>
-                        </div>
 
-                        <div className="p-3 bg-gradient-to-br from-green-50 to-green-100/50 rounded-lg border border-green-200">
-                            <div className="flex items-center gap-2 mb-1">
-                                <Users2 className="w-4 h-4 text-green-600" />
-                                <p className="text-2xl font-bold text-green-600">4.5B</p>
+                            <div className="p-3 bg-gradient-to-br from-green-50 to-green-100/50 rounded-lg border border-green-200">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <Users2 className="w-4 h-4 text-green-600" />
+                                    <p className="text-2xl font-bold text-green-600">4.5B</p>
+                                </div>
+                                <p className="text-xs text-slate-600">
+                                    Usuarios en redes sociales
+                                </p>
                             </div>
-                            <p className="text-xs text-slate-600">
-                                Usuarios en redes sociales
-                            </p>
-                        </div>
 
-                        <div className="p-3 bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-lg border border-orange-200">
-                            <div className="flex items-center gap-2 mb-1">
-                                <BarChart3 className="w-4 h-4 text-orange-600" />
-                                <p className="text-2xl font-bold text-orange-600">2.5x</p>
+                            <div className="p-3 bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-lg border border-orange-200">
+                                <div className="flex items-center gap-2 mb-1">
+                                    <BarChart3 className="w-4 h-4 text-orange-600" />
+                                    <p className="text-2xl font-bold text-orange-600">2.5x</p>
+                                </div>
+                                <p className="text-xs text-slate-600">
+                                    Mayor crecimiento digital
+                                </p>
                             </div>
-                            <p className="text-xs text-slate-600">
-                                Mayor crecimiento digital
-                            </p>
                         </div>
                     </div>
-                </div>
 
-                {/* Scope Section */}
-                <div className="flex-1">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-3">
-                        Alcance del Servicio
-                    </h2>
-                    <div className="w-16 h-1 bg-primary mb-4"></div>
+                    {/* Scope Section */}
+                    <div className="flex-1">
+                        <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                            Alcance del Servicio
+                        </h2>
+                        <div className="w-16 h-1 bg-amber-400 mb-4"></div>
 
-                    {projectDescription && (
-                        <div className="mb-4 p-4 bg-slate-50 rounded-lg border-l-4 border-primary">
-                            <p className="text-sm text-slate-700 leading-relaxed">{projectDescription}</p>
-                        </div>
-                    )}
-
-                    <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                        ¿Qué Incluye?
-                    </h3>
-
-                    <div className="grid grid-cols-1 gap-2">
-                        {scope.map((item, index) => (
-                            <div
-                                key={index}
-                                className="flex items-start gap-3 p-3 bg-white rounded-lg border border-slate-200"
-                            >
-                                <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                <p className="text-sm text-slate-700">{item}</p>
+                        {projectDescription && (
+                            <div className="mb-4 p-4 bg-slate-50 rounded-lg border-l-4 border-amber-400">
+                                <p className="text-sm text-slate-700 leading-relaxed">{projectDescription}</p>
                             </div>
-                        ))}
-                    </div>
-                </div>
+                        )}
 
-                {/* Footer decoration */}
-                <div className="mt-6 pt-6">
-                    <div className="flex items-center gap-4 text-sm text-slate-400">
-                        <div className="flex-1 h-px bg-slate-200"></div>
-                        <span>Alcance IT</span>
-                        <div className="flex-1 h-px bg-slate-200"></div>
-                    </div>
-                </div>
+                        <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                            ¿Qué Incluye?
+                        </h3>
 
+                        <div className="grid grid-cols-1 gap-2">
+                            {scope.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className="flex items-start gap-3 p-3 bg-white rounded-lg border border-slate-200"
+                                >
+                                    <CheckCircle2 className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
+                                    <p className="text-sm text-slate-700">{item}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Footer decoration */}
+                    <div className="mt-6 pt-6">
+                        <div className="flex items-center gap-4 text-sm text-slate-400">
+                            <div className="flex-1 h-px bg-slate-200"></div>
+                            <span>Alcance IT</span>
+                            <div className="flex-1 h-px bg-slate-200"></div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         );
     }
