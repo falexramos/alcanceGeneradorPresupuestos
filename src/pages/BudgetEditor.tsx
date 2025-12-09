@@ -205,21 +205,22 @@ export function BudgetEditor() {
         <div className="container mx-auto pb-24 px-4 max-w-4xl pt-6">
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
                 <div className="flex items-center gap-4 w-full">
-                    <button onClick={() => navigate(-1)} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10">
+                    <button onClick={() => navigate(-1)} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 w-10 shrink-0">
                         <ArrowLeft size={20} />
                     </button>
-                    <h1 className="text-2xl font-bold tracking-tight flex-1">
-                        {isTemplateMode ? 'Plantilla' : (id === 'new' ? 'Nuevo Presupuesto' : 'Editar Presupuesto')}
+                    <h1 className="text-xl md:text-2xl font-bold tracking-tight flex-1 truncate">
+                        {isTemplateMode ? 'Plantilla' : (id === 'new' ? 'Nuevo' : 'Editar')}
                     </h1>
                 </div>
 
-                <div className="flex gap-2 w-full md:w-auto justify-end">
+                {/* Desktop Actions */}
+                <div className="hidden md:flex gap-2 w-auto justify-end">
                     {!isTemplateMode && (
                         <button onClick={() => handlePrint()} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 gap-2">
-                            <Printer size={18} /> <span className="hidden sm:inline">Imprimir</span>
+                            <Printer size={18} /> Imprimir
                         </button>
                     )}
-                    <button onClick={handleSave} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 gap-2 w-full md:w-auto">
+                    <button onClick={handleSave} className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 gap-2">
                         <Save size={18} /> Guardar
                     </button>
                 </div>
@@ -393,6 +394,30 @@ export function BudgetEditor() {
                         />
                     </label>
                 </div>
+            </div>
+
+            {/* Mobile Sticky Action Bar */}
+            <div className="md:hidden fixed bottom-6 left-4 right-4 bg-background border border-border shadow-lg rounded-full p-2 flex items-center justify-around z-50">
+                {!isTemplateMode && (
+                    <button
+                        onClick={() => handlePrint()}
+                        className="flex flex-col items-center justify-center p-2 text-muted-foreground hover:text-primary transition-colors"
+                        title="Imprimir"
+                    >
+                        <Printer size={20} />
+                        <span className="text-[10px] font-medium mt-1">Imprimir</span>
+                    </button>
+                )}
+
+                <div className="w-px h-8 bg-border mx-2"></div>
+
+                <button
+                    onClick={handleSave}
+                    className="flex flex-col items-center justify-center p-2 text-primary font-bold hover:text-primary/80 transition-colors flex-1"
+                >
+                    <Save size={24} className="mb-1" />
+                    <span className="text-xs">GUARDAR</span>
+                </button>
             </div>
 
             {/* Hidden Print Component */}

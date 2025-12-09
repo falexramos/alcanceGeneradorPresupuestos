@@ -22,14 +22,14 @@ export function NewBudget() {
 
     return (
         <div>
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold tracking-tight">Nuevo Presupuesto</h2>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Nuevo Presupuesto</h2>
                 <button
                     onClick={handleCreateTemplate}
-                    className="inline-flex items-center gap-2 rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+                    className="inline-flex items-center gap-2 rounded-md border bg-background px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors w-full sm:w-auto justify-center"
                 >
                     <Plus size={18} />
-                    <span className="hidden sm:inline">Crear Plantilla</span>
+                    <span>Crear Plantilla</span>
                 </button>
             </div>
 
