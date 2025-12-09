@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Plus, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
+import { Plus, Trash2, ChevronDown } from 'lucide-react';
 import { type BudgetItem } from '../../db/db';
 
 interface BudgetItemsListProps {
@@ -24,26 +24,7 @@ export function BudgetItemsList({
     const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
 
     // Auto-expand new items (empty description) on mount or when added
-    useEffect(() => {
-        const newExpanded = new Set(expandedIds);
-        let changed = false;
-        items.forEach(item => {
-            // If item has empty description, treat as "editing needed" - but only if we haven't explicitly navigated away?
-            // Actually, simpler: if it's effectively "new" (empty desc), ensure it's expanded initially.
-            // To avoid forcing it open if user closed it despite being empty, we might need more complex logic.
-            // But for this use case, "Empty description = open" is a decent heuristic for discovery.
-            // HOWEVER, this prevents closing an empty item.
-            // Better strategy: Only auto-expand if it's NOT in the list AND it's physically the last one added? 
-            // Let's just leave manual control + initial expand for truly new ones if we could detect.
-            // For now, let's try strict manual toggle, BUT if description is empty, render it with a special style or suggestion?
-            // Actually, let's just default all existing non-empty items to closed, and empty items to open?
-            // This logic allows closing an empty item to delete it later or ignore it.
-        });
-    }, [items.length]); // Dependency on count changes?
 
-    // Better approach: When user clicks "Add", we know a new item comes in. 
-    // Since we can't easily signal from parent, we'll just check if there's a new item (diffing length).
-    // Let's just use a simple heuristic inside the render Loop for default state if not tracked?
     // No, controlled state is best.
 
     const toggleExpand = (id: string) => {

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Plus, X, Pencil, Check } from 'lucide-react';
-import { DEFAULT_TEXTS } from '../../utils/templates';
 
 interface BudgetTermsEditorProps {
     salesRepEmail?: string;
@@ -23,7 +22,7 @@ export function BudgetTermsEditor({
     scopeDetails = [], setScopeDetails
 }: BudgetTermsEditorProps) {
 
-    const defaultNotes = DEFAULT_TEXTS.introduction.long("").includes("IVA") ? "" : 'Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.'; // Hardcoded default from BudgetEditor initial state for detection
+
 
     const [editNotes, setEditNotes] = useState(false);
 

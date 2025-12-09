@@ -38,7 +38,7 @@ export async function generatePDF(
 
         // A4 dimensions in mm
         const a4Width = 210;
-        const a4Height = 297;
+
 
         // Create PDF
         const pdf = new jsPDF({
