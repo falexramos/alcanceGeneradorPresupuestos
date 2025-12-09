@@ -39,11 +39,24 @@ export const BudgetTermsPage = forwardRef<HTMLDivElement, BudgetTermsPageProps>(
                             Forma de Pago
                         </h3>
                     </div>
-                    <p className="text-slate-700 leading-relaxed ml-13">
+                    <p className="text-slate-700 leading-relaxed ml-13 mb-4">
                         {paymentTerms || defaultPaymentTerms}
                     </p>
-                    <div className="mt-4 ml-13 text-sm text-slate-500">
-                        <p>Métodos aceptados: Transferencia bancaria, tarjeta de crédito/débito</p>
+
+                    <div className="ml-13 p-4 bg-white rounded-md border border-slate-200 text-sm">
+                        <p className="font-semibold text-slate-800 mb-2">Pago con Tarjeta de Crédito / Débito:</p>
+                        <p className="text-slate-600 mb-2">
+                            Aceptamos pagos seguros en línea mediante tarjeta. Si el pago es con tarjeta de crédito, se añadirá un 3% de comisión por procesamiento.
+                        </p>
+                        <a
+                            href="https://square.link/u/TwuolFQG"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:underline break-all font-medium flex items-center gap-2"
+                        >
+                            <Globe size={14} />
+                            https://square.link/u/TwuolFQG
+                        </a>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@ import { type Budget } from '../db/db';
 import { BudgetCoverPage } from './BudgetCoverPage';
 import { CombinedIntroObjectivesPage } from './CombinedIntroObjectivesPage';
 import { CombinedMarketScopePage } from './CombinedMarketScopePage';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Mail, Globe } from 'lucide-react';
 
 interface BudgetDocProps {
     budget: Budget;
@@ -166,12 +166,29 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                     </div>
 
                     {/* Payment Terms */}
-                    {budget.paymentTerms && (
-                        <div className="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
-                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Forma de Pago</h3>
-                            <p className="text-sm text-slate-700 leading-relaxed">{budget.paymentTerms}</p>
+                    {/* Payment Terms */}
+                    <div className="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <div className="flex items-center gap-2 mb-2">
+                            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500">Forma de Pago</h3>
                         </div>
-                    )}
+                        <p className="text-sm text-slate-700 leading-relaxed mb-3">{budget.paymentTerms || "50% al inicio, 50% contra entrega"}</p>
+
+                        <div className="p-3 bg-white rounded border border-slate-200 text-sm">
+                            <p className="font-semibold text-slate-800 text-xs mb-1">Pago con Tarjeta:</p>
+                            <p className="text-xs text-slate-600 mb-2">
+                                Aceptamos pagos seguros en línea. Nota: Aplica cargo del 3% por procesamientos con tarjeta de crédito.
+                            </p>
+                            <a
+                                href="https://square.link/u/TwuolFQG"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary hover:underline break-all font-medium flex items-center gap-1 text-xs"
+                            >
+                                <Globe size={12} />
+                                https://square.link/u/TwuolFQG
+                            </a>
+                        </div>
+                    </div>
 
                     {/* Additional Notes */}
                     {budget.additionalNotes && (
