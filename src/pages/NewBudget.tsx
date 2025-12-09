@@ -39,21 +39,40 @@ export function NewBudget() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Standard Templates */}
-                {BUDGET_TEMPLATES.map(template => {
+                {/* Standard Templates */}
+                {BUDGET_TEMPLATES.map((template, index) => {
                     const Icon = IconMap[template.icon] || FileText;
+
+                    // Assign unique, vibrant color styles for each template card
+                    const styles = [
+                        "bg-blue-50 border-blue-200 text-blue-900 hover:border-blue-400 group-hover:shadow-blue-100",
+                        "bg-emerald-50 border-emerald-200 text-emerald-900 hover:border-emerald-400 group-hover:shadow-emerald-100",
+                        "bg-purple-50 border-purple-200 text-purple-900 hover:border-purple-400 group-hover:shadow-purple-100",
+                        "bg-amber-50 border-amber-200 text-amber-900 hover:border-amber-400 group-hover:shadow-amber-100",
+                    ];
+
+                    const iconStyles = [
+                        "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
+                        "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
+                        "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
+                        "bg-amber-100 text-amber-600 group-hover:bg-amber-600 group-hover:text-white",
+                    ];
+
+                    const styleIndex = index % styles.length;
+                    const cardStyle = styles[styleIndex];
+                    const iconStyle = iconStyles[styleIndex];
+
                     return (
                         <div
                             key={template.id}
                             onClick={() => handleSelectTemplate(template.id)}
-                            className="group relative cursor-pointer rounded-lg border bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md hover:border-primary"
+                            className={`group relative cursor-pointer rounded-xl border p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ${cardStyle} h-full flex flex-col justify-center items-center text-center`}
                         >
-                            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                                <Icon size={24} />
+                            <div className={`mb-3 inline-flex h-14 w-14 items-center justify-center rounded-2xl transition-colors ${iconStyle} shadow-sm`}>
+                                <Icon size={28} />
                             </div>
-                            <h3 className="mb-2 text-lg font-semibold">{template.name}</h3>
-                            <p className="text-sm text-muted-foreground leading-relaxed">
-                                {template.description}
-                            </p>
+                            <h3 className="text-lg font-bold tracking-tight">{template.name}</h3>
+                            {/* Description hidden as requested for mobile optimization */}
                         </div>
                     );
                 })}
