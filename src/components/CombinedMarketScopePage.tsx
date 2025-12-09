@@ -22,7 +22,7 @@ export const CombinedMarketScopePage = forwardRef<HTMLDivElement, CombinedMarket
         const scope = scopeDetails && scopeDetails.length > 0 ? scopeDetails : defaultScope;
 
         return (
-            <div ref={ref} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div ref={ref} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
                 {/* Market Analysis Section */}
                 <div className="mb-8">

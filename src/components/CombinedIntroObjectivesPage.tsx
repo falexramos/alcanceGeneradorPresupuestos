@@ -15,7 +15,7 @@ export const CombinedIntroObjectivesPage = forwardRef<HTMLDivElement, CombinedIn
         const defaultObjectives = `Nuestro objetivo es proporcionar una solución integral que permita aumentar la visibilidad digital, optimizar procesos operativos y generar un retorno de inversión medible y sostenible.`;
 
         return (
-            <div ref={ref} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div ref={ref} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
                 {/* Introducción Section */}
                 <div className="mb-10">

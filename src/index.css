@@ -75,15 +75,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-/* Print styles for PDF generation */
-@media print {
-  .pdf-page {
-    page-break-inside: avoid;
-    min-height: 29.7cm;
-  }
-
-  .pdf-page:not(:last-child) {
-    page-break-after: always;
-  }
-}

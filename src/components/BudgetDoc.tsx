@@ -48,7 +48,7 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
             />
 
             {/* Page 4: Budget Table ONLY - Compact */}
-            <div className="pdf-page bg-white p-8 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div className="bg-white p-8 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
                 <div className="mb-4">
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">Presupuesto</h2>
@@ -110,7 +110,7 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
 
             {/* Images Pages (if any) */}
             {customImages && customImages.length > 0 && customImages.map((url, idx) => (
-                <div key={idx} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col items-center justify-center">
+                <div key={idx} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col items-center justify-center">
                     <h3 className="text-2xl font-bold text-slate-900 mb-8">Referencia {idx + 1}</h3>
                     <div className="flex-1 flex items-center justify-center w-full">
                         <img
@@ -123,7 +123,7 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
             ))}
 
             {/* Last Page: Contact Info - NO separate footer page */}
-            <div className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
                 {/* Header */}
                 <div className="mb-10">
