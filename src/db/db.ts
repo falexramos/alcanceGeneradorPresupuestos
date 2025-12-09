@@ -2,23 +2,31 @@ import Dexie, { type Table } from 'dexie';
 
 // Interfaces for our Data Models
 export interface Budget {
-    id: string; // UUID
+    id: string;
     title: string;
     clientName: string;
-    type: 'web' | 'consultoria' | 'auditoria' | 'otro';
-    status: 'draft' | 'completed';
+    type: 'web' | 'marketing' | 'ecommerce' | 'otro';
+    status: 'draft' | 'sent' | 'approved' | 'rejected';
     totalAmount: number;
     currency: string;
-    createdAt: number; // Timestamp
-    updatedAt: number; // Timestamp
     items: BudgetItem[];
-    themeColor?: string;
-    logoBlobId?: string; // Legacy: used to be logo, now deprecated or used for specific overrides
-    coverImageBlobId?: string; // Reference to Asset for project image (Legacy/Single)
-    projectImageIds?: string[]; // New: Array of images
-    projectDescription?: string; // Detailed description of the service
+    coverImageBlobId?: string;
+    projectImageIds?: string[];
+    projectDescription?: string;
     salesRepName?: string;
     salesRepPhone?: string;
+    salesRepEmail?: string;
+    // New content sections
+    introduction?: string; // Introducción
+    objectives?: string; // Objetivos y Estrategia
+    marketAnalysis?: string; // Análisis de Mercado
+    // Commercial terms
+    paymentTerms?: string;
+    proposalValidity?: string;
+    additionalNotes?: string;
+    scopeDetails?: string[];
+    createdAt: number;
+    updatedAt: number;
 }
 
 export interface BudgetItem {

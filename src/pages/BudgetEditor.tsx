@@ -10,6 +10,8 @@ import { Save, ArrowLeft, Printer } from 'lucide-react';
 import { BudgetProjectInfo } from '../components/budget/BudgetProjectInfo';
 import { BudgetItemsList } from '../components/budget/BudgetItemsList';
 import { BudgetImageGallery } from '../components/budget/BudgetImageGallery';
+import { BudgetTermsEditor } from '../components/budget/BudgetTermsEditor';
+import { BudgetContentEditor } from '../components/budget/BudgetContentEditor';
 
 export function BudgetEditor() {
     const { id } = useParams<{ id: string }>();
@@ -29,6 +31,23 @@ export function BudgetEditor() {
     const [salesRepName, setSalesRepName] = useState('Hans Latorre');
     const [salesRepPhone, setSalesRepPhone] = useState('(404) 276 - 6484');
     const [items, setItems] = useState<BudgetItem[]>([]);
+
+    // New content sections - empty by default, will use defaults in PDF if empty
+    const [introduction, setIntroduction] = useState('');
+    const [objectives, setObjectives] = useState('');
+    const [marketAnalysis, setMarketAnalysis] = useState('');
+    const [salesRepEmail, setSalesRepEmail] = useState('');
+
+    // Commercial terms fields - WITH DEFAULT VALUES
+    const [paymentTerms, setPaymentTerms] = useState('50% al inicio del proyecto, 50% contra entrega');
+    const [proposalValidity, setProposalValidity] = useState('15 días');
+    const [additionalNotes, setAdditionalNotes] = useState('Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.');
+    const [scopeDetails, setScopeDetails] = useState<string[]>([
+        'Atención personalizada durante todo el proyecto',
+        'Soporte técnico post-entrega',
+        'Garantía de satisfacción',
+        'Actualizaciones y mejoras incluidas'
+    ]);
 
     // Multi-image state
     const [projectImageIds, setProjectImageIds] = useState<string[]>([]);
@@ -77,7 +96,24 @@ export function BudgetEditor() {
                         setProjectDescription(existing.projectDescription || '');
                         setSalesRepName(existing.salesRepName || 'Hans Latorre');
                         setSalesRepPhone(existing.salesRepPhone || '(404) 276 - 6484');
+                        setSalesRepEmail(existing.salesRepEmail || '');
                         setItems(existing.items);
+
+                        // Load content sections
+                        setIntroduction(existing.introduction || '');
+                        setObjectives(existing.objectives || '');
+                        setMarketAnalysis(existing.marketAnalysis || '');
+
+                        // Load commercial terms - keep defaults if not set
+                        setPaymentTerms(existing.paymentTerms || '50% al inicio del proyecto, 50% contra entrega');
+                        setProposalValidity(existing.proposalValidity || '15 días');
+                        setAdditionalNotes(existing.additionalNotes || 'Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.');
+                        setScopeDetails(existing.scopeDetails || [
+                            'Atención personalizada durante todo el proyecto',
+                            'Soporte técnico post-entrega',
+                            'Garantía de satisfacción',
+                            'Actualizaciones y mejoras incluidas'
+                        ]);
 
                         const ids = existing.projectImageIds || [];
                         if (ids.length === 0 && existing.coverImageBlobId) {
@@ -186,6 +222,16 @@ export function BudgetEditor() {
             projectDescription,
             salesRepName,
             salesRepPhone,
+            salesRepEmail,
+            // Content sections
+            introduction,
+            objectives,
+            marketAnalysis,
+            // Commercial terms
+            paymentTerms,
+            proposalValidity,
+            additionalNotes,
+            scopeDetails,
             createdAt: Date.now(),
             updatedAt: Date.now()
         };
@@ -251,6 +297,28 @@ export function BudgetEditor() {
                 formatCurrency={formatCurrency}
             />
 
+            <BudgetContentEditor
+                introduction={introduction}
+                setIntroduction={setIntroduction}
+                objectives={objectives}
+                setObjectives={setObjectives}
+                marketAnalysis={marketAnalysis}
+                setMarketAnalysis={setMarketAnalysis}
+            />
+
+            <BudgetTermsEditor
+                salesRepEmail={salesRepEmail}
+                setSalesRepEmail={setSalesRepEmail}
+                paymentTerms={paymentTerms}
+                setPaymentTerms={setPaymentTerms}
+                proposalValidity={proposalValidity}
+                setProposalValidity={setProposalValidity}
+                additionalNotes={additionalNotes}
+                setAdditionalNotes={setAdditionalNotes}
+                scopeDetails={scopeDetails}
+                setScopeDetails={setScopeDetails}
+            />
+
             <BudgetImageGallery
                 images={imagePreviews}
                 onRemoveImage={handleRemoveImage}
@@ -298,6 +366,14 @@ export function BudgetEditor() {
                         projectDescription,
                         salesRepName,
                         salesRepPhone,
+                        salesRepEmail,
+                        introduction,
+                        objectives,
+                        marketAnalysis,
+                        paymentTerms,
+                        proposalValidity,
+                        additionalNotes,
+                        scopeDetails,
                         createdAt: Date.now(),
                         updatedAt: Date.now()
                     }}
