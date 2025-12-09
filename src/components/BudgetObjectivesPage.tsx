@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { Target, TrendingUp, Users } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface BudgetObjectivesPageProps {
     objectives?: string;
 }
@@ -8,21 +10,7 @@ interface BudgetObjectivesPageProps {
 export const BudgetObjectivesPage = forwardRef<HTMLDivElement, BudgetObjectivesPageProps>(
     ({ objectives }, ref) => {
 
-        const defaultObjectives = `Nuestro objetivo principal es proporcionar una solución integral que permita:
-
-• Aumentar la visibilidad y presencia digital de su marca
-• Optimizar los procesos operativos mediante tecnología
-• Generar un retorno de inversión medible y sostenible
-• Establecer una base sólida para el crecimiento futuro
-
-Estrategia de Implementación:
-
-1. Análisis inicial y definición de requerimientos
-2. Diseño y planificación detallada
-3. Desarrollo e implementación por fases
-4. Pruebas exhaustivas y ajustes
-5. Lanzamiento y monitoreo continuo
-6. Soporte y optimización post-lanzamiento`;
+        const defaultObjectives = DEFAULT_TEXTS.objectives.long;
 
         return (
             <div ref={ref} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">

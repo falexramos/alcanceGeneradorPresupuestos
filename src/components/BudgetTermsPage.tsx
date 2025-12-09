@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { CreditCard, Calendar, FileText, Phone, Mail, Globe } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface BudgetTermsPageProps {
     paymentTerms?: string;
     proposalValidity?: string;
@@ -13,8 +15,8 @@ interface BudgetTermsPageProps {
 export const BudgetTermsPage = forwardRef<HTMLDivElement, BudgetTermsPageProps>(
     ({ paymentTerms, proposalValidity, additionalNotes, salesRepName, salesRepPhone, salesRepEmail }, ref) => {
 
-        const defaultPaymentTerms = "50% al inicio del proyecto, 50% contra entrega";
-        const defaultValidity = "15 días a partir de la fecha de emisión";
+        const defaultPaymentTerms = DEFAULT_TEXTS.terms.payment;
+        const defaultValidity = DEFAULT_TEXTS.terms.validity;
 
         return (
             <div ref={ref} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">

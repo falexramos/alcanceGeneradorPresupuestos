@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { DEFAULT_TEXTS } from '../utils/templates';
 
 interface BudgetIntroductionPageProps {
     introduction?: string;
@@ -8,13 +9,7 @@ interface BudgetIntroductionPageProps {
 export const BudgetIntroductionPage = forwardRef<HTMLDivElement, BudgetIntroductionPageProps>(
     ({ introduction, clientName }, ref) => {
 
-        const defaultIntroduction = `Estimado/a cliente,
-
-Nos complace presentarle esta propuesta comercial diseñada específicamente para ${clientName}. En Alcance IT, nos especializamos en ofrecer soluciones tecnológicas innovadoras que impulsan el crecimiento y la transformación digital de nuestros clientes.
-
-Nuestra experiencia y compromiso con la excelencia nos permiten entregar proyectos que no solo cumplen, sino que superan las expectativas. Cada solución está diseñada pensando en las necesidades únicas de su negocio.
-
-Estamos entusiasmados por la oportunidad de trabajar con ustedes y contribuir al éxito de su organización.`;
+        const defaultIntroduction = DEFAULT_TEXTS.introduction.long(clientName);
 
         return (
             <div ref={ref} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">

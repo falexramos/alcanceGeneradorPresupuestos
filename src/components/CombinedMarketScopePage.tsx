@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { BarChart3, TrendingUp, Users2, CheckCircle2 } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface CombinedMarketScopePageProps {
     marketAnalysis?: string;
     scopeDetails?: string[];
@@ -10,14 +12,9 @@ interface CombinedMarketScopePageProps {
 export const CombinedMarketScopePage = forwardRef<HTMLDivElement, CombinedMarketScopePageProps>(
     ({ marketAnalysis, scopeDetails, projectDescription }, ref) => {
 
-        const defaultAnalysis = `El mercado digital presenta oportunidades significativas. La transformación digital es esencial para mantener la competitividad, con empresas que invierten en tecnología experimentando un crecimiento 2.5x superior.`;
+        const defaultAnalysis = DEFAULT_TEXTS.marketAnalysis.short;
 
-        const defaultScope = [
-            'Atención personalizada durante todo el proyecto',
-            'Soporte técnico post-entrega',
-            'Garantía de satisfacción',
-            'Actualizaciones y mejoras incluidas'
-        ];
+        const defaultScope = DEFAULT_TEXTS.scope;
 
         const scope = scopeDetails && scopeDetails.length > 0 ? scopeDetails : defaultScope;
 

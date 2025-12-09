@@ -74,3 +74,63 @@ export const BUDGET_TEMPLATES: BudgetTemplate[] = [
         ]
     }
 ];
+
+export const DEFAULT_TEXTS = {
+    introduction: {
+        long: (clientName: string) => `Estimado/a cliente,
+
+Nos complace presentarle esta propuesta comercial diseñada específicamente para ${clientName}. En Alcance IT, nos especializamos en ofrecer soluciones tecnológicas innovadoras que impulsan el crecimiento y la transformación digital de nuestros clientes.
+
+Nuestra experiencia y compromiso con la excelencia nos permiten entregar proyectos que no solo cumplen, sino que superan las expectativas. Cada solución está diseñada pensando en las necesidades únicas de su negocio.
+
+Estamos entusiasmados por la oportunidad de trabajar con ustedes y contribuir al éxito de su organización.`,
+        short: (clientName: string) => `Nos complace presentarle esta propuesta comercial diseñada específicamente para ${clientName}. En Alcance IT, nos especializamos en ofrecer soluciones tecnológicas innovadoras que impulsan el crecimiento y la transformación digital de nuestros clientes.`
+    },
+    objectives: {
+        long: `Nuestro objetivo principal es proporcionar una solución integral que permita:
+
+• Aumentar la visibilidad y presencia digital de su marca
+• Optimizar los procesos operativos mediante tecnología
+• Generar un retorno de inversión medible y sostenible
+• Establecer una base sólida para el crecimiento futuro
+
+Estrategia de Implementación:
+
+1. Análisis inicial y definición de requerimientos
+2. Diseño y planificación detallada
+3. Desarrollo e implementación por fases
+4. Pruebas exhaustivas y ajustes
+5. Lanzamiento y monitoreo continuo
+6. Soporte y optimización post-lanzamiento`,
+        short: `Nuestro objetivo es proporcionar una solución integral que permita aumentar la visibilidad digital, optimizar procesos operativos y generar un retorno de inversión medible y sostenible.`
+    },
+    marketAnalysis: {
+        long: `El mercado digital actual presenta oportunidades significativas para empresas que buscan expandir su presencia online y optimizar sus operaciones.
+
+Tendencias Clave:
+
+• Crecimiento sostenido del comercio electrónico y servicios digitales
+• Mayor demanda de experiencias de usuario personalizadas
+• Importancia crítica de la presencia en redes sociales
+• Necesidad de soluciones tecnológicas escalables y seguras
+
+Oportunidades Identificadas:
+
+La transformación digital ya no es opcional sino esencial para mantener la competitividad. Las empresas que invierten en tecnología y presencia digital experimentan un crecimiento promedio 2.5x superior a aquellas que no lo hacen.
+
+Ventaja Competitiva:
+
+Implementar las soluciones propuestas permitirá posicionarse estratégicamente en el mercado, diferenciarse de la competencia y capturar nuevas oportunidades de negocio.`,
+        short: `El mercado digital presenta oportunidades significativas. La transformación digital es esencial para mantener la competitividad, con empresas que invierten en tecnología experimentando un crecimiento 2.5x superior.`
+    },
+    scope: [
+        'Atención personalizada durante todo el proyecto',
+        'Soporte técnico post-entrega',
+        'Garantía de satisfacción',
+        'Actualizaciones y mejoras incluidas'
+    ],
+    terms: {
+        payment: "50% al inicio del proyecto, 50% contra entrega",
+        validity: "15 días a partir de la fecha de emisión"
+    }
+};

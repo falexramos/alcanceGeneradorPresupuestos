@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { BarChart3, TrendingUp, Users2 } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface BudgetMarketAnalysisPageProps {
     marketAnalysis?: string;
 }
@@ -8,22 +10,7 @@ interface BudgetMarketAnalysisPageProps {
 export const BudgetMarketAnalysisPage = forwardRef<HTMLDivElement, BudgetMarketAnalysisPageProps>(
     ({ marketAnalysis }, ref) => {
 
-        const defaultAnalysis = `El mercado digital actual presenta oportunidades significativas para empresas que buscan expandir su presencia online y optimizar sus operaciones.
-
-Tendencias Clave:
-
-• Crecimiento sostenido del comercio electrónico y servicios digitales
-• Mayor demanda de experiencias de usuario personalizadas
-• Importancia crítica de la presencia en redes sociales
-• Necesidad de soluciones tecnológicas escalables y seguras
-
-Oportunidades Identificadas:
-
-La transformación digital ya no es opcional sino esencial para mantener la competitividad. Las empresas que invierten en tecnología y presencia digital experimentan un crecimiento promedio 2.5x superior a aquellas que no lo hacen.
-
-Ventaja Competitiva:
-
-Implementar las soluciones propuestas permitirá posicionarse estratégicamente en el mercado, diferenciarse de la competencia y capturar nuevas oportunidades de negocio.`;
+        const defaultAnalysis = DEFAULT_TEXTS.marketAnalysis.long;
 
         return (
             <div ref={ref} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">

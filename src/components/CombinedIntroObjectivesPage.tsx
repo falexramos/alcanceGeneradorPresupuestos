@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { Target, TrendingUp, Users } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface CombinedIntroObjectivesPageProps {
     introduction?: string;
     objectives?: string;
@@ -10,9 +12,9 @@ interface CombinedIntroObjectivesPageProps {
 export const CombinedIntroObjectivesPage = forwardRef<HTMLDivElement, CombinedIntroObjectivesPageProps>(
     ({ introduction, objectives, clientName }, ref) => {
 
-        const defaultIntroduction = `Nos complace presentarle esta propuesta comercial diseñada específicamente para ${clientName}. En Alcance IT, nos especializamos en ofrecer soluciones tecnológicas innovadoras que impulsan el crecimiento y la transformación digital de nuestros clientes.`;
+        const defaultIntroduction = DEFAULT_TEXTS.introduction.short(clientName);
 
-        const defaultObjectives = `Nuestro objetivo es proporcionar una solución integral que permita aumentar la visibilidad digital, optimizar procesos operativos y generar un retorno de inversión medible y sostenible.`;
+        const defaultObjectives = DEFAULT_TEXTS.objectives.short;
 
         return (
             <div ref={ref} className="bg-gradient-to-br from-amber-50 via-white to-amber-50/50 min-h-[29.7cm] mx-auto max-w-[21cm] relative overflow-hidden p-12 text-slate-800 font-sans flex flex-col">

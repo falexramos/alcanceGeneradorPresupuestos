@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { CheckCircle2 } from 'lucide-react';
 
+import { DEFAULT_TEXTS } from '../utils/templates';
+
 interface BudgetScopePageProps {
     scopeDetails?: string[];
     projectDescription?: string;
@@ -9,12 +11,7 @@ interface BudgetScopePageProps {
 export const BudgetScopePage = forwardRef<HTMLDivElement, BudgetScopePageProps>(
     ({ scopeDetails, projectDescription }, ref) => {
         // Default scope if none provided
-        const defaultScope = [
-            'Atención personalizada durante todo el proyecto',
-            'Soporte técnico post-entrega',
-            'Garantía de satisfacción',
-            'Actualizaciones y mejoras incluidas'
-        ];
+        const defaultScope = DEFAULT_TEXTS.scope;
 
         const scope = scopeDetails && scopeDetails.length > 0 ? scopeDetails : defaultScope;
 
