@@ -1,4 +1,6 @@
-import { Plus, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Plus, X, Pencil, Check } from 'lucide-react';
+import { DEFAULT_TEXTS } from '../../utils/templates';
 
 interface BudgetTermsEditorProps {
     salesRepEmail?: string;
@@ -20,6 +22,17 @@ export function BudgetTermsEditor({
     additionalNotes, setAdditionalNotes,
     scopeDetails = [], setScopeDetails
 }: BudgetTermsEditorProps) {
+
+    const defaultNotes = DEFAULT_TEXTS.introduction.long("").includes("IVA") ? "" : 'Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.'; // Hardcoded default from BudgetEditor initial state for detection
+
+    const [editNotes, setEditNotes] = useState(false);
+
+    useEffect(() => {
+        // If notes are different from the hardcoded default or empty, show editor
+        if (additionalNotes && additionalNotes !== 'Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.') {
+            setEditNotes(true);
+        }
+    }, []);
 
     const inputClass = "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50";
     const labelClass = "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2 block text-muted-foreground";
@@ -64,9 +77,6 @@ export function BudgetTermsEditor({
                         onChange={e => setPaymentTerms(e.target.value)}
                         placeholder="Ej: 50% al inicio, 50% contra entrega"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">
-                        Edita el texto predeterminado según tus necesidades
-                    </p>
                 </div>
 
                 {/* Proposal Validity */}
@@ -78,23 +88,52 @@ export function BudgetTermsEditor({
                         onChange={e => setProposalValidity(e.target.value)}
                         placeholder="Ej: 15 días"
                     />
-                    <p className="text-xs text-muted-foreground mt-1">
-                        Edita el texto predeterminado según tus necesidades
-                    </p>
                 </div>
 
-                {/* Additional Notes */}
-                <div>
-                    <label className={labelClass}>Notas Adicionales</label>
-                    <textarea
-                        className={`${inputClass} min-h-[80px]`}
-                        value={additionalNotes || ''}
-                        onChange={e => setAdditionalNotes(e.target.value)}
-                        placeholder="Notas legales, aclaraciones importantes..."
-                    />
-                    <p className="text-xs text-muted-foreground mt-1">
-                        Edita el texto predeterminado según tus necesidades
-                    </p>
+                {/* Additional Notes Toggle */}
+                <div className="border border-slate-200 rounded-lg overflow-hidden transition-all duration-300">
+                    <div className="bg-slate-50 px-4 py-3 flex items-center justify-between">
+                        <div className="flex items-center gap-3 overflow-hidden">
+                            <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${editNotes ? 'bg-amber-100 text-amber-600' : 'bg-green-100 text-green-600'}`}>
+                                {editNotes ? <Pencil size={14} /> : <Check size={14} />}
+                            </div>
+                            <div className="min-w-0">
+                                <p className="font-medium text-slate-700 text-sm truncate">Notas Adicionales</p>
+                                <p className="text-xs text-slate-500 truncate">
+                                    {editNotes ? 'Editando notas' : 'Usando notas estándar'}
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => {
+                                if (editNotes) {
+                                    setAdditionalNotes(''); // Revert to empty (which might mean default in some contexts, but here explicitly empty string if disabled?) 
+                                    // Actually, let's keep the logic consistent: Disabled = Default. Enabled = Custom.
+                                    // But BudgetEditor initializes with a default string. 
+                                    // So if we disable, we probably want to reset it to that default string.
+                                    setAdditionalNotes('Los precios no incluyen IVA. Una vez aceptada la propuesta, se procederá con la firma del contrato y el inicio del proyecto.');
+                                    setEditNotes(false);
+                                } else {
+                                    // If enabling, and it's currently the default, leave it as is so they can edit it.
+                                    setEditNotes(true);
+                                }
+                            }}
+                            className={`ml-2 text-xs font-semibold px-3 py-1.5 rounded-full transition-colors ${editNotes ? 'bg-slate-200 text-slate-600 hover:bg-slate-300' : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50'}`}
+                        >
+                            {editNotes ? 'Deshacer' : 'Personalizar'}
+                        </button>
+                    </div>
+
+                    {editNotes && (
+                        <div className="p-4 bg-white animate-in slide-in-from-top-2 duration-200">
+                            <textarea
+                                className={`${inputClass} min-h-[100px]`}
+                                value={additionalNotes || ''}
+                                onChange={e => setAdditionalNotes(e.target.value)}
+                                placeholder="Notas legales, aclaraciones importantes..."
+                            />
+                        </div>
+                    )}
                 </div>
 
                 {/* Scope Details */}

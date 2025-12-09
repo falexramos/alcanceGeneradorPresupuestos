@@ -310,6 +310,7 @@ export function BudgetEditor() {
                 setObjectives={setObjectives}
                 marketAnalysis={marketAnalysis}
                 setMarketAnalysis={setMarketAnalysis}
+                clientName={clientName}
             />
 
             <BudgetTermsEditor
