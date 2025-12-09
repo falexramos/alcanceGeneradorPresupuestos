@@ -48,11 +48,11 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
             />
 
             {/* Page 4: Budget Table ONLY - Compact */}
-            <div className="bg-white p-8 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            <div className="bg-white p-6 mx-auto max-w-[21cm] text-slate-800 font-sans flex flex-col">
 
-                <div className="mb-4">
+                <div className="mb-3">
                     <h2 className="text-2xl font-bold text-slate-900 mb-2">Presupuesto</h2>
-                    <div className="w-16 h-1 bg-primary mb-3"></div>
+                    <div className="w-16 h-1 bg-primary mb-2"></div>
 
                     <div className="flex justify-between text-xs text-slate-600 mb-3">
                         <div>
@@ -108,6 +108,9 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
 
             </div>
 
+            {/* Page Break - Force new page for contact info */}
+            <div style={{ pageBreakAfter: 'always' }} className="h-0"></div>
+
             {/* Images Pages (if any) */}
             {customImages && customImages.length > 0 && customImages.map((url, idx) => (
                 <div key={idx} className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col items-center justify-center">
@@ -122,99 +125,99 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                 </div>
             ))}
 
-            {/* Last Page: Contact Info - NO separate footer page */}
-            <div className="bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
+            {/* Last Page: Contact Info - Compact to fit in one page */}
+            <div className="bg-white p-6 mx-auto max-w-[21cm] text-slate-800 font-sans flex flex-col">
 
                 {/* Header */}
-                <div className="mb-10">
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                <div className="mb-6">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-2">
                         Información de Contacto
                     </h2>
-                    <div className="w-20 h-1 bg-primary"></div>
+                    <div className="w-16 h-1 bg-primary"></div>
                 </div>
 
                 {/* Payment Terms */}
                 {budget.paymentTerms && (
-                    <div className="mb-6 p-6 bg-slate-50 rounded-lg border border-slate-200">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">Forma de Pago</h3>
-                        <p className="text-slate-700 leading-relaxed">{budget.paymentTerms}</p>
+                    <div className="mb-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Forma de Pago</h3>
+                        <p className="text-sm text-slate-700 leading-relaxed">{budget.paymentTerms}</p>
                     </div>
                 )}
 
                 {/* Additional Notes */}
                 {budget.additionalNotes && (
-                    <div className="mb-6 p-6 bg-amber-50 rounded-lg border border-amber-200">
-                        <h3 className="text-sm font-bold uppercase tracking-wider text-amber-700 mb-3">Notas Importantes</h3>
-                        <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{budget.additionalNotes}</p>
+                    <div className="mb-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-amber-700 mb-2">Notas Importantes</h3>
+                        <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">{budget.additionalNotes}</p>
                     </div>
                 )}
 
-                {/* Contact Cards */}
-                <div className="flex-1 flex flex-col justify-center">
-                    <h3 className="text-xl font-semibold text-slate-900 mb-6">
+                {/* Contact Cards - Compact */}
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold text-slate-900 mb-4">
                         ¿Tienes preguntas? Contáctanos
                     </h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Sales Rep Card */}
-                        <div className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl border-2 border-primary/20">
-                            <div className="mb-4">
-                                <p className="text-xs uppercase tracking-widest text-primary font-bold mb-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Sales Rep Card - Compact */}
+                        <div className="p-4 bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg border border-primary/20">
+                            <div className="mb-3">
+                                <p className="text-xs uppercase tracking-widest text-primary font-bold mb-1">
                                     Tu Asesor Comercial
                                 </p>
-                                <p className="text-2xl font-bold text-slate-900 mb-1">
+                                <p className="text-lg font-bold text-slate-900">
                                     {budget.salesRepName || 'Equipo Comercial'}
                                 </p>
                             </div>
 
-                            <div className="space-y-3">
+                            <div className="space-y-2">
                                 {budget.salesRepPhone && (
-                                    <div className="flex items-center gap-3 text-slate-700">
-                                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                                            <Phone className="w-5 h-5 text-primary" />
+                                    <div className="flex items-center gap-2 text-slate-700">
+                                        <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                                            <Phone className="w-4 h-4 text-primary" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-slate-500 uppercase tracking-wide">Teléfono</p>
-                                            <p className="font-semibold">{budget.salesRepPhone}</p>
+                                            <p className="text-xs text-slate-500 uppercase">Teléfono</p>
+                                            <p className="text-sm font-semibold">{budget.salesRepPhone}</p>
                                         </div>
                                     </div>
                                 )}
                                 {budget.salesRepEmail && (
-                                    <div className="flex items-center gap-3 text-slate-700">
-                                        <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                                            <Mail className="w-5 h-5 text-primary" />
+                                    <div className="flex items-center gap-2 text-slate-700">
+                                        <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+                                            <Mail className="w-4 h-4 text-primary" />
                                         </div>
                                         <div>
-                                            <p className="text-xs text-slate-500 uppercase tracking-wide">Email</p>
-                                            <p className="font-semibold break-all">{budget.salesRepEmail}</p>
+                                            <p className="text-xs text-slate-500 uppercase">Email</p>
+                                            <p className="text-sm font-semibold break-all">{budget.salesRepEmail}</p>
                                         </div>
                                     </div>
                                 )}
                             </div>
                         </div>
 
-                        {/* Company Card */}
-                        <div className="p-8 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl border-2 border-slate-200">
-                            <div className="mb-4">
-                                <p className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-2">
+                        {/* Company Card - Compact */}
+                        <div className="p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg border border-slate-200">
+                            <div className="mb-3">
+                                <p className="text-xs uppercase tracking-widest text-slate-500 font-bold mb-1">
                                     Empresa
                                 </p>
-                                <p className="text-2xl font-bold text-slate-900 mb-1">
+                                <p className="text-lg font-bold text-slate-900">
                                     Alcance IT
                                 </p>
-                                <p className="text-sm text-slate-600">
+                                <p className="text-xs text-slate-600">
                                     Soluciones Tecnológicas
                                 </p>
                             </div>
 
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3 text-slate-700">
-                                    <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
-                                        <Mail className="w-5 h-5 text-slate-600" />
+                            <div className="space-y-2">
+                                <div className="flex items-center gap-2 text-slate-700">
+                                    <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center shrink-0">
+                                        <Mail className="w-4 h-4 text-slate-600" />
                                     </div>
                                     <div>
-                                        <p className="text-xs text-slate-500 uppercase tracking-wide">Email</p>
-                                        <p className="font-semibold">contacto@alcance-it.es</p>
+                                        <p className="text-xs text-slate-500 uppercase">Email</p>
+                                        <p className="text-sm font-semibold">contacto@alcance-it.es</p>
                                     </div>
                                 </div>
                             </div>
@@ -223,11 +226,11 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                 </div>
 
                 {/* Footer - Integrated in same page */}
-                <div className="mt-8 pt-6 border-t text-center">
-                    <p className="text-sm text-slate-400 mb-2">
+                <div className="mt-4 pt-4 border-t text-center">
+                    <p className="text-xs text-slate-400 mb-1">
                         Este presupuesto es válido por {budget.proposalValidity || '15 días'}.
                     </p>
-                    <p className="text-sm text-slate-400">
+                    <p className="text-xs text-slate-400">
                         https://alcance-it.es
                     </p>
                 </div>
