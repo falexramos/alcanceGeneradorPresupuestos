@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
-import { useReactToPrint } from 'react-to-print';
 import { db, type Budget, type BudgetItem } from '../db/db';
 import { BUDGET_TEMPLATES } from '../utils/templates';
 import { BudgetDocument } from '../components/BudgetDoc';
+import { generatePDF } from '../utils/pdfGenerator';
 import { Save, ArrowLeft, Printer } from 'lucide-react';
 
 // Sub-components
@@ -240,10 +240,16 @@ export function BudgetEditor() {
         navigate('/');
     };
 
-    const handlePrint = useReactToPrint({
-        contentRef: componentRef,
-        documentTitle: `Presupuesto-${clientName || 'Borrador'}`,
-    });
+    // Handle PDF generation using jsPDF + html2canvas
+    const handlePrint = async () => {
+        if (!componentRef.current) {
+            alert('Error: No se pudo generar el PDF');
+            return;
+        }
+
+        const filename = `Presupuesto-${clientName || 'Borrador'}.pdf`;
+        await generatePDF(componentRef.current, filename);
+    };
 
     const formatCurrency = (val: number) => {
         return val.toLocaleString('es-ES', { minimumFractionDigits: 0 });
@@ -349,8 +355,14 @@ export function BudgetEditor() {
                 </button>
             </div>
 
-            {/* Hidden Print Component */}
-            <div className="hidden">
+            {/* PDF Component - Positioned off-screen for html2canvas */}
+            <div style={{
+                position: 'fixed',
+                left: '-9999px',
+                top: 0,
+                width: '794px', // A4 width at 96 DPI
+                zIndex: -1
+            }}>
                 <BudgetDocument
                     ref={componentRef}
                     budget={{
