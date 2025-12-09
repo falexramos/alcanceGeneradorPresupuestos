@@ -252,7 +252,8 @@ export function BudgetEditor() {
     };
 
     const formatCurrency = (val: number) => {
-        return val.toLocaleString('es-ES', { minimumFractionDigits: 0 });
+        // Force thousands separator using regex to ensure it displays regardless of browser locale defaults
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
 
     if (loading) return <div className="flex items-center justify-center min-h-screen">Cargando...</div>;
