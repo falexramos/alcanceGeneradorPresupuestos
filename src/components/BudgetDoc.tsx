@@ -1,11 +1,8 @@
 import { forwardRef } from 'react';
 import { type Budget } from '../db/db';
-import appLogo from '../assets/logo.png';
 import { BudgetCoverPage } from './BudgetCoverPage';
-import { BudgetIntroductionPage } from './BudgetIntroductionPage';
-import { BudgetObjectivesPage } from './BudgetObjectivesPage';
-import { BudgetMarketAnalysisPage } from './BudgetMarketAnalysisPage';
-import { BudgetScopePage } from './BudgetScopePage';
+import { CombinedIntroObjectivesPage } from './CombinedIntroObjectivesPage';
+import { CombinedMarketScopePage } from './CombinedMarketScopePage';
 import { Phone, Mail } from 'lucide-react';
 
 interface BudgetDocProps {
@@ -36,90 +33,60 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                 createdAt={budget.createdAt}
             />
 
-            {/* Page 2: Introduction */}
-            <BudgetIntroductionPage
+            {/* Page 2: Introduction + Objectives (Combined) */}
+            <CombinedIntroObjectivesPage
                 introduction={budget.introduction}
+                objectives={budget.objectives}
                 clientName={budget.clientName}
             />
 
-            {/* Page 3: Objectives & Strategy */}
-            <BudgetObjectivesPage
-                objectives={budget.objectives}
-            />
-
-            {/* Page 4: Market Analysis */}
-            <BudgetMarketAnalysisPage
+            {/* Page 3: Market Analysis + Scope (Combined) */}
+            <CombinedMarketScopePage
                 marketAnalysis={budget.marketAnalysis}
-            />
-
-            {/* Page 5: Scope/What's Included */}
-            <BudgetScopePage
                 scopeDetails={budget.scopeDetails}
                 projectDescription={budget.projectDescription}
             />
 
-            {/* Page 6: Items & Pricing */}
-            <div className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans leading-normal flex flex-col">
+            {/* Page 4: Budget Table ONLY - Compact */}
+            <div className="pdf-page bg-white p-8 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
-                {/* Header */}
-                <header className="flex justify-between items-start border-b-2 border-primary/20 pb-8 mb-8">
-                    <div className="w-1/2">
-                        <img src={appLogo} alt="Company Logo" className="h-16 object-contain mb-4" />
-                        <div className="text-sm text-slate-500 space-y-1">
-                            <p className="font-semibold text-slate-900">Alcance IT</p>
-                            <p>Soluciones Tecnológicas</p>
-                            <p>contacto@alcance-it.es</p>
-                        </div>
-                    </div>
-                    <div className="text-right w-1/2">
-                        <h1 className="text-3xl font-bold text-primary mb-2">PRESUPUESTO</h1>
-                        <div className="text-sm text-slate-500 space-y-1">
-                            <p>
-                                <span className="font-semibold">Fecha:</span> {new Date(budget.createdAt).toLocaleDateString('es-ES')}
-                            </p>
-                            <p>
-                                <span className="font-semibold">Referencia:</span> #{budget.id.slice(0, 8).toUpperCase()}
-                            </p>
-                        </div>
-                    </div>
-                </header>
+                <div className="mb-4">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Presupuesto</h2>
+                    <div className="w-16 h-1 bg-primary mb-3"></div>
 
-                {/* Client Info */}
-                <div className="mb-12 flex justify-between gap-8">
-                    <div className="w-1/2">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Facturar a</h3>
-                        <p className="text-lg font-semibold text-slate-900">{budget.clientName || 'Cliente General'}</p>
-                    </div>
-                    <div className="w-1/2 text-right">
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Preparado por</h3>
-                        <p className="text-lg font-semibold text-slate-900">{budget.salesRepName || 'Equipo Comercial'}</p>
-                        <p className="text-slate-600">{budget.salesRepPhone || ''}</p>
+                    <div className="flex justify-between text-xs text-slate-600 mb-3">
+                        <div>
+                            <p><span className="font-semibold">Cliente:</span> {budget.clientName}</p>
+                            <p><span className="font-semibold">Fecha:</span> {new Date(budget.createdAt).toLocaleDateString('es-ES')}</p>
+                        </div>
+                        <div className="text-right">
+                            <p><span className="font-semibold">Ref:</span> #{budget.id.slice(0, 8).toUpperCase()}</p>
+                            <p><span className="font-semibold">Preparado por:</span> {budget.salesRepName || 'Equipo Comercial'}</p>
+                        </div>
                     </div>
                 </div>
 
-                {/* Items Table */}
-                <div className="mb-8 flex-1">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b-2 border-primary/20">Desglose de Servicios</h2>
-
+                {/* Table Only - Compact */}
+                <div className="flex-1">
                     <div className="border border-slate-200 rounded-lg overflow-hidden">
                         <table className="w-full">
                             <thead>
                                 <tr className="bg-gradient-to-r from-primary/10 to-primary/5">
-                                    <th className="py-4 px-4 text-left text-xs font-bold text-slate-700 uppercase tracking-widest">Descripción</th>
-                                    <th className="py-4 px-4 text-center text-xs font-bold text-slate-700 uppercase tracking-widest w-20">Cant.</th>
-                                    <th className="py-4 px-4 text-right text-xs font-bold text-slate-700 uppercase tracking-widest w-32">Precio Unit.</th>
-                                    <th className="py-4 px-4 text-right text-xs font-bold text-slate-700 uppercase tracking-widest w-32 bg-primary/5">Total</th>
+                                    <th className="py-2 px-3 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">Descripción</th>
+                                    <th className="py-2 px-3 text-center text-xs font-bold text-slate-700 uppercase tracking-wider w-16">Cant.</th>
+                                    <th className="py-2 px-3 text-right text-xs font-bold text-slate-700 uppercase tracking-wider w-28">Precio Unit.</th>
+                                    <th className="py-2 px-3 text-right text-xs font-bold text-slate-700 uppercase tracking-wider w-28 bg-primary/5">Total</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {budget.items.map((item, index) => (
                                     <tr key={index} className="hover:bg-slate-50/50 transition-colors">
-                                        <td className="py-4 px-4 text-slate-700">
+                                        <td className="py-2 px-3 text-sm text-slate-700">
                                             <p className="font-medium text-slate-900">{item.description}</p>
                                         </td>
-                                        <td className="py-4 px-4 text-center text-slate-600 font-medium">{item.quantity}</td>
-                                        <td className="py-4 px-4 text-right text-slate-600">${formatCurrency(item.unitPrice)}</td>
-                                        <td className="py-4 px-4 text-right font-semibold text-slate-900 bg-slate-50/50">
+                                        <td className="py-2 px-3 text-center text-sm text-slate-600 font-medium">{item.quantity}</td>
+                                        <td className="py-2 px-3 text-right text-sm text-slate-600">${formatCurrency(item.unitPrice)}</td>
+                                        <td className="py-2 px-3 text-right text-sm font-semibold text-slate-900 bg-slate-50/50">
                                             ${formatCurrency(item.quantity * item.unitPrice)}
                                         </td>
                                     </tr>
@@ -127,11 +94,11 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                             </tbody>
                             <tfoot>
                                 <tr className="bg-gradient-to-r from-primary/5 to-primary/10 border-t-2 border-primary/20">
-                                    <td colSpan={3} className="py-5 px-4 text-right">
-                                        <span className="text-lg font-bold text-slate-900">TOTAL ESTIMADO</span>
+                                    <td colSpan={3} className="py-3 px-3 text-right">
+                                        <span className="text-base font-bold text-slate-900">TOTAL ESTIMADO</span>
                                     </td>
-                                    <td className="py-5 px-4 text-right">
-                                        <span className="text-2xl font-bold text-primary">${formatCurrency(calculateTotal())}</span>
+                                    <td className="py-3 px-3 text-right">
+                                        <span className="text-xl font-bold text-primary">${formatCurrency(calculateTotal())}</span>
                                     </td>
                                 </tr>
                             </tfoot>
@@ -139,21 +106,9 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                     </div>
                 </div>
 
-                {/* Footer */}
-                <footer className="mt-auto pt-8 border-t border-slate-100">
-                    <p className="text-center text-sm text-slate-400 mb-2">
-                        Este presupuesto es válido por {budget.proposalValidity || '15 días'}.
-                    </p>
-                    <div className="flex justify-center gap-4 text-xs text-slate-300">
-                        <span>https://alcance-it.es/</span>
-                        <span>•</span>
-                        <span>Confidencial</span>
-                    </div>
-                </footer>
-
             </div>
 
-            {/* Images Pages */}
+            {/* Images Pages (if any) */}
             {customImages && customImages.length > 0 && customImages.map((url, idx) => (
                 <div key={idx} className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col items-center justify-center">
                     <h3 className="text-2xl font-bold text-slate-900 mb-8">Referencia {idx + 1}</h3>
@@ -167,11 +122,11 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                 </div>
             ))}
 
-            {/* Page 7: Contact Info */}
+            {/* Last Page: Contact Info - NO separate footer page */}
             <div className="pdf-page bg-white p-12 mx-auto max-w-[21cm] min-h-[29.7cm] text-slate-800 font-sans flex flex-col">
 
                 {/* Header */}
-                <div className="mb-12">
+                <div className="mb-10">
                     <h2 className="text-3xl font-bold text-slate-900 mb-2">
                         Información de Contacto
                     </h2>
@@ -180,7 +135,7 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
 
                 {/* Payment Terms */}
                 {budget.paymentTerms && (
-                    <div className="mb-8 p-6 bg-slate-50 rounded-lg border border-slate-200">
+                    <div className="mb-6 p-6 bg-slate-50 rounded-lg border border-slate-200">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-3">Forma de Pago</h3>
                         <p className="text-slate-700 leading-relaxed">{budget.paymentTerms}</p>
                     </div>
@@ -188,19 +143,19 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
 
                 {/* Additional Notes */}
                 {budget.additionalNotes && (
-                    <div className="mb-8 p-6 bg-amber-50 rounded-lg border border-amber-200">
+                    <div className="mb-6 p-6 bg-amber-50 rounded-lg border border-amber-200">
                         <h3 className="text-sm font-bold uppercase tracking-wider text-amber-700 mb-3">Notas Importantes</h3>
                         <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">{budget.additionalNotes}</p>
                     </div>
                 )}
 
                 {/* Contact Cards */}
-                <div className="mt-auto">
+                <div className="flex-1 flex flex-col justify-center">
                     <h3 className="text-xl font-semibold text-slate-900 mb-6">
                         ¿Tienes preguntas? Contáctanos
                     </h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* Sales Rep Card */}
                         <div className="p-8 bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl border-2 border-primary/20">
                             <div className="mb-4">
@@ -265,11 +220,16 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Footer */}
-                    <div className="text-center text-sm text-slate-400 pt-8 border-t">
-                        <p>https://alcance-it.es</p>
-                    </div>
+                {/* Footer - Integrated in same page */}
+                <div className="mt-8 pt-6 border-t text-center">
+                    <p className="text-sm text-slate-400 mb-2">
+                        Este presupuesto es válido por {budget.proposalValidity || '15 días'}.
+                    </p>
+                    <p className="text-sm text-slate-400">
+                        https://alcance-it.es
+                    </p>
                 </div>
 
             </div>
