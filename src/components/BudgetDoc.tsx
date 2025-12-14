@@ -179,13 +179,13 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                                 Aceptamos pagos seguros en línea. Nota: Aplica cargo del 3% por procesamientos con tarjeta de crédito.
                             </p>
                             <a
-                                href="https://square.link/u/TwuolFQG"
+                                href="https://buy.stripe.com/5kQ9AS39M4bl3Pe7HHaMU01"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-primary hover:underline break-all font-medium flex items-center gap-1 text-xs"
                             >
                                 <Globe size={12} />
-                                https://square.link/u/TwuolFQG
+                                https://buy.stripe.com/5kQ9AS39M4bl3Pe7HHaMU01
                             </a>
                         </div>
                     </div>
