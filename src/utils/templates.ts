@@ -187,6 +187,75 @@ export const BUDGET_TEMPLATES: BudgetTemplate[] = [
             { description: 'Incluido en Infraestructura: Buscador MeiliSearch Cloud (para búsqueda instantánea)', quantity: 1, unitPrice: 0 },
             { description: 'Incluido en Infraestructura: Servicio de emails con Resend (Para mensajeria de email y notificaciones)', quantity: 1, unitPrice: 0 }
         ]
+    },
+    {
+        id: 'diseno-identidad',
+        name: 'Identidad Visual Corporativa',
+        description: 'Diseño completo de identidad de marca: logotipo, paleta de colores, tipografías y manual de uso. Todo lo necesario para proyectar una imagen profesional.',
+        icon: 'Palette',
+        defaultItems: [
+            { description: 'Diseño de logotipo profesional (3 propuestas + ajustes)', quantity: 1, unitPrice: 350 },
+            { description: 'Variaciones del logo (horizontal, vertical, icono, monocromático)', quantity: 1, unitPrice: 0 },
+            { description: 'Definición de paleta de colores corporativos (primarios y secundarios)', quantity: 1, unitPrice: 0 },
+            { description: 'Selección de tipografías principales y complementarias', quantity: 1, unitPrice: 0 },
+            { description: 'Manual de identidad visual básico (uso correcto del logo, colores y tipografías)', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de tarjeta de presentación (ambas caras)', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de firma de correo electrónico', quantity: 1, unitPrice: 0 },
+            { description: 'Entrega de archivos en formatos editables (AI, PSD) y exportados (PNG, JPG, PDF, SVG)', quantity: 1, unitPrice: 0 },
+            { description: '2 rondas de revisiones incluidas', quantity: 1, unitPrice: 0 }
+        ]
+    },
+    {
+        id: 'diseno-piezas-basico',
+        name: 'Diseño Gráfico - Pack Básico',
+        description: 'Paquete de piezas gráficas para redes sociales y uso digital. Ideal para mantener una presencia visual consistente.',
+        icon: 'Image',
+        defaultItems: [
+            { description: 'Diseño de piezas gráficas para redes sociales', quantity: 6, unitPrice: 0 },
+            { description: 'Adaptación de diseños a diferentes formatos (feed, historia, portada)', quantity: 1, unitPrice: 0 },
+            { description: 'Retoque y optimización de fotografías proporcionadas', quantity: 4, unitPrice: 0 },
+            { description: 'Diseño de banner o portada para redes sociales', quantity: 1, unitPrice: 0 },
+            { description: 'Uso de identidad visual existente del cliente', quantity: 1, unitPrice: 0 },
+            { description: 'Entrega en formatos optimizados para web (JPG, PNG)', quantity: 1, unitPrice: 0 },
+            { description: '1 ronda de cambios por pieza', quantity: 1, unitPrice: 0 }
+        ]
+    },
+    {
+        id: 'diseno-piezas-completo',
+        name: 'Diseño Gráfico - Pack Completo',
+        description: 'Servicio integral de diseño gráfico: piezas digitales, material impreso, retoque fotográfico profesional y elementos visuales personalizados.',
+        icon: 'Sparkles',
+        defaultItems: [
+            { description: 'Diseño de piezas gráficas para redes sociales', quantity: 12, unitPrice: 0 },
+            { description: 'Diseño de historias animadas o carruseles', quantity: 4, unitPrice: 0 },
+            { description: 'Adaptación de diseños a múltiples formatos y plataformas', quantity: 1, unitPrice: 0 },
+            { description: 'Retoque fotográfico profesional (corrección de color, iluminación, fondo)', quantity: 8, unitPrice: 0 },
+            { description: 'Diseño de flyer o volante digital/impreso', quantity: 2, unitPrice: 0 },
+            { description: 'Diseño de banner publicitario (web o impreso)', quantity: 2, unitPrice: 0 },
+            { description: 'Creación de mockups para presentación de productos', quantity: 3, unitPrice: 0 },
+            { description: 'Diseño de plantillas reutilizables para el cliente', quantity: 2, unitPrice: 0 },
+            { description: 'Iconografía personalizada o ilustraciones simples', quantity: 1, unitPrice: 0 },
+            { description: 'Entrega en formatos editables (PSD, AI) y exportados (PNG, JPG, PDF)', quantity: 1, unitPrice: 0 },
+            { description: '2 rondas de cambios por pieza', quantity: 1, unitPrice: 0 }
+        ]
+    },
+    {
+        id: 'diseno-impreso',
+        name: 'Diseño para Material Impreso',
+        description: 'Diseño de material gráfico para impresión: brochures, catálogos, papelería corporativa y material promocional.',
+        icon: 'FileImage',
+        defaultItems: [
+            { description: 'Diseño de brochure o folleto (hasta 6 páginas)', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de catálogo de productos (hasta 12 páginas)', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de tarjetas de presentación (ambas caras)', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de hoja membretada y sobre corporativo', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de carpeta corporativa', quantity: 1, unitPrice: 0 },
+            { description: 'Diseño de flyer promocional (ambas caras)', quantity: 2, unitPrice: 0 },
+            { description: 'Diseño de roll-up o banner para eventos', quantity: 1, unitPrice: 0 },
+            { description: 'Preparación de archivos para imprenta (CMYK, sangrado, marcas de corte)', quantity: 1, unitPrice: 0 },
+            { description: 'Entrega en formatos editables y PDF listo para impresión', quantity: 1, unitPrice: 0 },
+            { description: '2 rondas de revisiones incluidas', quantity: 1, unitPrice: 0 }
+        ]
     }
 ];
 
