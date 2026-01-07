@@ -1,6 +1,6 @@
-import { Outlet, Link } from 'react-router-dom';
 import { LayoutDashboard, PlusCircle } from 'lucide-react';
-import logoWhite from '../assets/logo-white.svg';
+import { Link, Outlet } from 'react-router-dom';
+import logoWhite from '../assets/logo.png';
 
 export function MainLayout() {
     return (
