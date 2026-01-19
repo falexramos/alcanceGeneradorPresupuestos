@@ -1,5 +1,5 @@
+import { Calendar, CreditCard, FileText, Globe, Mail, Phone } from 'lucide-react';
 import { forwardRef } from 'react';
-import { CreditCard, Calendar, FileText, Phone, Mail, Globe } from 'lucide-react';
 
 import { DEFAULT_TEXTS } from '../utils/templates';
 
@@ -43,21 +43,13 @@ export const BudgetTermsPage = forwardRef<HTMLDivElement, BudgetTermsPageProps>(
                         {paymentTerms || defaultPaymentTerms}
                     </p>
 
-                    <div className="ml-13 p-4 bg-white rounded-md border border-slate-200 text-sm">
-                        <p className="font-semibold text-slate-800 mb-2">Pago con Tarjeta de Crédito / Débito:</p>
-                        <p className="text-slate-600 mb-2">
-                            Aceptamos pagos seguros en línea mediante tarjeta. Si el pago es con tarjeta de crédito, se añadirá un 3% de comisión por procesamiento.
-                        </p>
-                        <a
-                            href="https://square.link/u/TwuolFQG"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline break-all font-medium flex items-center gap-2"
-                        >
-                            <Globe size={14} />
-                            https://square.link/u/TwuolFQG
-                        </a>
-                    </div>
+                        <div className="ml-13 p-4 bg-white rounded-md border border-slate-200 text-sm">
+                            <p className="font-semibold text-slate-800 mb-2">Pago por Transferencia Bancaria:</p>
+                            <p className="text-slate-600 mb-2">
+                                Puede realizar el pago a la siguiente cuenta:<br />
+                                <span className="font-bold">UnitedBank cuenta No 1110185871</span>
+                            </p>
+                        </div>
                 </div>
 
                 {/* Proposal Validity */}

@@ -174,19 +174,11 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                         <p className="text-sm text-slate-700 leading-relaxed mb-3">{budget.paymentTerms || "50% al inicio, 50% contra entrega"}</p>
 
                         <div className="p-3 bg-white rounded border border-slate-200 text-sm">
-                            <p className="font-semibold text-slate-800 text-xs mb-1">Pago con Tarjeta:</p>
+                            <p className="font-semibold text-slate-800 text-xs mb-1">Pago por Transferencia Bancaria:</p>
                             <p className="text-xs text-slate-600 mb-2">
-                                Aceptamos pagos seguros en línea. Nota: Aplica cargo del 3% por procesamientos con tarjeta de crédito.
+                                Puede realizar el pago a la siguiente cuenta:<br />
+                                <span className="font-bold">UnitedBank cuenta No 1110185871</span>
                             </p>
-                            <a
-                                href="https://buy.stripe.com/5kQ9AS39M4bl3Pe7HHaMU01"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-primary hover:underline break-all font-medium flex items-center gap-1 text-xs"
-                            >
-                                <Globe size={12} />
-                                https://buy.stripe.com/5kQ9AS39M4bl3Pe7HHaMU01
-                            </a>
                         </div>
                     </div>
 
