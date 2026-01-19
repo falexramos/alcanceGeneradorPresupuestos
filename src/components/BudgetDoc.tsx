@@ -176,8 +176,8 @@ export const BudgetDocument = forwardRef<HTMLDivElement, BudgetDocProps>((props,
                         <div className="p-3 bg-white rounded border border-slate-200 text-sm">
                             <p className="font-semibold text-slate-800 text-xs mb-1">Pago por Transferencia Bancaria:</p>
                             <p className="text-xs text-slate-600 mb-2">
-                                Puede realizar el pago a la siguiente cuenta:<br />
-                                <span className="font-bold">UnitedBank cuenta No 1110185871</span>
+                                UnitedBank cuenta No 1110185871<br />
+                                <span className="font-bold">H&amp;H BUSINESS AND MARKETING SERVICES</span>
                             </p>
                         </div>
                     </div>
