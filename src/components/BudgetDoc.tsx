@@ -1,9 +1,9 @@
+import { Mail, Phone } from 'lucide-react';
 import { forwardRef } from 'react';
 import { type Budget } from '../db/db';
 import { BudgetCoverPage } from './BudgetCoverPage';
 import { CombinedIntroObjectivesPage } from './CombinedIntroObjectivesPage';
 import { CombinedMarketScopePage } from './CombinedMarketScopePage';
-import { Phone, Mail, Globe } from 'lucide-react';
 
 interface BudgetDocProps {
     budget: Budget;
